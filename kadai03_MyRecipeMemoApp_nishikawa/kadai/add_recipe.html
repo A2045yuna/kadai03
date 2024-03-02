@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>addRecipes</title>
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/sample.css" />
+  </head>
+  <body>
+    <header>
+      <h1>AddNewRecipe</h1>
+    </header>
+    <main>
+      <textarea
+        name="recipe_name"
+        id="recipe_name"
+        cols="1"
+        rows="1"
+      ></textarea>
+      <textarea
+        name="recipe_detail"
+        id="recipe_detail"
+        cols="30"
+        rows="10"
+      ></textarea>
+      <ul>
+        <li id="save">Save</li>
+        <li id="clear">Clear</li>
+      </ul>
+    </main>
+    <script>
+      let recipeList = []; // すべてのレシピをオブジェクトとして格納する
+      let recipe = '';
+      $("#save").on("click", function () {
+        let recipeName = $("#recipe_name").val(); //get data
+        let recipeDetail = $("#recipe_detail").val();
+        let obj = {
+          name: recipeName,
+          recipe: recipeDetail,
+        };
+        console.dir(obj);
+        let data = JSON.stringify(obj);
+        localStorage.setItem(recipeName, data); // save data on local strage
+        console.dir(data);
+      });
+
+        const val = localStorage.getItem(recipe); //todo
+        $("#recipe_name").val(val.name);
+        $("#recipe_name").val(val.recipe);
+
+      $("#clear").on("click", function () {
+        localStorage.clear();
+        $("#recipe_name").val("");
+        $("#recipe_detail").val("");
+      });
+    </script>
+  </body>
+</html>
