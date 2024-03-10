@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>myMemoPad</title>
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/sample2.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>MyRecipeMemoApp</h1>
+    </header>
+    <div>
+        <button type="button" onclick="location.href='add_recipe.html'">新しいレシピを追加する</button>
+    </div>
+    <main> 
+        <form id="recipe_list"></form>
+    </main>
+
+    <footer><small>MyRecipeMemoApp</small></footer>
+    <script>
+        let recipes = '';
+        for(let i=0; i<localStorage.length; i++){
+            let key = localStorage.key(i);
+            let jsonObj = localStorage.getItem(key);
+            console.dir(jsonObj);
+            recipes += `<ul><li>${JSON.parse(jsonObj).name}</li></ul>`;
+        }
+        $('#recipe_list').html(recipes);
+        // console.log(recipes);
+
+        $('li').on('click', function(){
+            let value = JSON.parse(jsonObj).name; 
+            window.location.href = `mod_recipe.html?valuew=${value}`;
+        });
+    </script>
+</body>
+
+</html>
